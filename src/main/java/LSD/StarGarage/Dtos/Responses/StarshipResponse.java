@@ -7,6 +7,7 @@ import lombok.Getter;
 @Getter
 public class StarshipResponse
 {
+    private Long id;
     private String name;
     private String model;
     private float cargoCapacity;

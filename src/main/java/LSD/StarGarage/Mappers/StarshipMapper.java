@@ -33,13 +33,22 @@ public class StarshipMapper
         return starship;
     }
     public StarshipsResponse starshipsListToResponse(List<Starship> list) {
+
         List<Starship> responseList = new ArrayList<>();
         for (Starship starship : list)
         {
+            Individual captain=Individual.builder()
+                    .id(starship.getCaptain().getId())
+                    .name(starship.getCaptain().getName())
+                    .lastName(starship.getCaptain().getLastName())
+                    .species(starship.getCaptain().getSpecies())
+                    .build();
             Starship newStarship=Starship.builder()
+                    .id(starship.getId())
                     .name(starship.getName())
                     .model(starship.getModel())
                     .cargoCapacity(starship.getCargoCapacity())
+                    .captain(captain)
                     .build();
             responseList.add(newStarship);
         }

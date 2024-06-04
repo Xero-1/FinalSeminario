@@ -4,11 +4,11 @@ import LSD.StarGarage.Dtos.Requests.IndividualRequest;
 import LSD.StarGarage.Dtos.Responses.IndividualsResponse;
 import LSD.StarGarage.Services.IndividualService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import java.sql.SQLException;
 
 @RequestMapping("/individual")
@@ -19,21 +19,21 @@ public class IndividualController
     private IndividualService service;
 
     @PostMapping("/newIndividual")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity addIndividual(@RequestBody IndividualRequest request)
     {
         return service.addIndividual(request);
     }
 
     @PutMapping("/updateIndividual/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity updateIndividual(@PathVariable("id") Long id, @RequestBody IndividualRequest request)
     {
         return service.updateIndividual(request,id);
     }
 
     @DeleteMapping("/deleteIndividual/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity deleteIndividual(@PathVariable("id") Long id) throws SQLException
     {
         try
@@ -47,7 +47,7 @@ public class IndividualController
     }
 
     @GetMapping()
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public IndividualsResponse listIndividuals()
     {

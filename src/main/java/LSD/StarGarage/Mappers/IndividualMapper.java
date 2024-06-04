@@ -23,12 +23,13 @@ public class IndividualMapper
     public IndividualsResponse individualsListToResponse(List<Individual> list)
     {
         List<Individual> responseList=new ArrayList<>();
-        for(Individual individual : list)
+        for(Individual i : list)
         {
             Individual newIndividual=Individual.builder()
-                    .name(individual.getName())
-                    .lastName(individual.getLastName())
-                    .species(individual.getSpecies())
+                    .id(i.getId())
+                    .name(i.getName())
+                    .lastName(i.getLastName())
+                    .species(i.getSpecies())
                     .build();
             responseList.add(newIndividual);
         }

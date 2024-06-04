@@ -47,4 +47,17 @@ public class StarshipService
             return ResponseEntity.badRequest().body("Not founded Starship with ID= "+id);
         }
     }
+
+    public List<Starship> findByName(String name)
+    {
+        return repository.findByName(name);
+    }
+    public Starship setNewOrExistentStarship(StarshipRequest request,Starship starship)
+    {
+        if(repository.findByName(request.getName()).isEmpty())
+            repository.save(starship);
+        else
+            starship=repository.findByName(request.getName()).get(0);
+        return starship;
+    }
 }

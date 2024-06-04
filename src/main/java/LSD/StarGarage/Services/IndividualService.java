@@ -20,11 +20,15 @@ public class IndividualService
     private IndividualMapper mapper;
 
 
-    public ResponseEntity addIndividual(IndividualRequest request)
-    {
-        Individual individual=mapper.individualRequestToIndividual(request);
-        repository.save(individual);
-        return ResponseEntity.ok("New Individual saved: "+individual.getName());
+    public ResponseEntity addIndividual(IndividualRequest request) {
+        Boolean exist = findByName(request.getName()).isEmpty();
+        if (exist)
+        {
+            Individual individual = mapper.individualRequestToIndividual(request);
+            repository.save(individual);
+            return ResponseEntity.ok("New Individual saved: " + individual.getName());
+        }else
+            return ResponseEntity.badRequest().body("The individual already exist.");
     }
     public void deleteIndividual(Long id)
     {
@@ -59,5 +63,9 @@ public class IndividualService
         else
             individual=repository.findByName(request.getName()).get(0);
         return individual;
+    }
+    public void saveIndividual(Individual individual)
+    {
+        repository.save(individual);
     }
 }
